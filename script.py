@@ -14,7 +14,7 @@ def scrape_website():
         page.wait_for_selector('.variation-max-min__value.data-valor.data-compra')  # Espera hasta que esté disponible el elemento
         
         # Extraer el texto completo (incluyendo texto oculto)
-        val1 = page.locator(".variation-max-min__value.data-valor.data-compra:nth-of-type(1)").text_content()
+        val1 =page.locator(".variation-max-min__value.data-valor.data-compra").first.text_content()
         print(f'val1 de la página (text_content): {val1}')
         
         # Extraer solo el texto visible
