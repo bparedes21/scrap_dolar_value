@@ -33,8 +33,13 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: dolar_data
-        path: dolar_data.json  # Archivo que se va a subir
-        
+        path: dolar_data.json 
+    
+    - name: Configurar git
+      run: |
+        git config --global user.name "bparedes21"
+        git config --global user.email "gestionorganizacion17@gmail.com"
+
     - name: Añadir el archivo y hacer commit
       run: |
         git add dolar_data.json
