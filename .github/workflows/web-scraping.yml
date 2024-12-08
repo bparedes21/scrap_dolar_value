@@ -5,7 +5,8 @@ on:
     branches:
       - main  # Se ejecuta cuando hay un push a la rama 'main'
   schedule:
-    - cron: '0 12-22/2 * * *'  # Se ejecuta todos los días a las 07:00 AM UTC
+    - cron: '0 12-22 * * *'  # Se ejecuta todos los días de 09:00 a 19:00 UTC-3 (equivalente a 12:00-22:00 UTC)
+
 jobs:
   scraping_job:
     runs-on: ubuntu-latest
@@ -35,17 +36,17 @@ jobs:
         name: dolar_data
         path: dolar_data.json 
     
-    - name: Configurar git
+    - name: ⚙️ Configurar git
       run: |
         git config --global user.name "bparedes21"
         git config --global user.email "gestionorganizacion17@gmail.com"
 
-   - name: Añadir el archivo y hacer commit
+    - name: 📂 Añadir el archivo y hacer commit
       run: |
         git add dolar_data.json
-        git commit -m "Guardar archivo de datos dolar_data.json"
+        git commit -m "Guardar archivo de datos dolar_data.json" || echo "No hay cambios para hacer commit"
     
-    - name: Hacer push de los cambios
+    - name: 🚀 Hacer push de los cambios
       env:
         GH_PAT: ${{ secrets.ADD_DATA }}
       run: |
