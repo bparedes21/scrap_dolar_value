@@ -40,8 +40,14 @@ jobs:
         git config --global user.name "bparedes21"
         git config --global user.email "gestionorganizacion17@gmail.com"
 
-    - name: Añadir el archivo y hacer commit
+   - name: Añadir el archivo y hacer commit
       run: |
         git add dolar_data.json
         git commit -m "Guardar archivo de datos dolar_data.json"
-        git push origin main  # Asegúrate de usar la rama correcta
+    
+    - name: Hacer push de los cambios
+      env:
+        GH_PAT: ${{ secrets.ADD_DATA }}
+      run: |
+        git push https://x-access-token:${{ secrets.ADD_DATA }}@github.com/bparedes21/scrap_dolar_value.git HEAD:main
+ta
