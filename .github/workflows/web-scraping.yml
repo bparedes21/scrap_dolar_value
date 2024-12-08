@@ -28,3 +28,9 @@ jobs:
     - name: 🚀 Ejecutar script de scraping
       run: |
         python script.py
+        
+    - name: 📁 Subir archivo JSON como artefacto
+      uses: actions/upload-artifact@v3
+      with:
+        name: dolar_data
+        path: dolar_data.json  # Archivo que se va a subir
