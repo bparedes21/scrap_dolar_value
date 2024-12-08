@@ -50,4 +50,3 @@ jobs:
         GH_PAT: ${{ secrets.ADD_DATA }}
       run: |
         git push https://x-access-token:${{ secrets.ADD_DATA }}@github.com/bparedes21/scrap_dolar_value.git HEAD:main
-ta
