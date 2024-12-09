@@ -43,7 +43,7 @@ def scrape_website():
             }
 
             # Exportar a JSON
-            with open('dolar_data.json', mode='a', encoding='utf-8') as file:
+            with open('dolar_data.json', mode='w', encoding='utf-8') as file:
                 file.write(json.dumps(data, ensure_ascii=False, indent=4))  # Agrega la entrada con saltos de línea
 
             print(f"✅ Datos exportados correctamente a 'dolar_data.json' con la fecha/hora {fecha_hora_utc3}")
