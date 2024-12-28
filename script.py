@@ -1,9 +1,44 @@
 import json
+import os
 from datetime import datetime, timedelta
 from playwright.sync_api import sync_playwright
 
+# Ruta del archivo para guardar los datos
+FILE_PATH = "dolar_data.txt"
+LAST_DATE_FILE = "last_date.txt"
+
+def get_current_date():
+    """Obtiene la fecha actual en formato AAAA-MM-DD (UTC-3)."""
+    utc_now = datetime.utcnow()
+    utc_minus_3 = utc_now - timedelta(hours=3)
+    return utc_minus_3.strftime('%Y-%m-%d')
+
+def clear_file_if_new_day():
+    """Borra el archivo si ha cambiado el día."""
+    current_date = get_current_date()
+
+    # Verificar si existe el archivo de fecha
+    if os.path.exists(LAST_DATE_FILE):
+        with open(LAST_DATE_FILE, mode="r", encoding="utf-8") as date_file:
+            last_date = date_file.read().strip()
+    else:
+        last_date = None
+
+    # Si es un nuevo día, limpiar el archivo y guardar la nueva fecha
+    if current_date != last_date:
+        open(FILE_PATH, mode="w", encoding="utf-8").close()  # Limpiar contenido del archivo
+        with open(LAST_DATE_FILE, mode="w", encoding="utf-8") as date_file:
+            date_file.write(current_date)
+
+def append_data_to_file(data):
+    """Agrega los datos al archivo de texto."""
+    with open(FILE_PATH, mode="a", encoding="utf-8") as file:
+        file.write(json.dumps(data, ensure_ascii=False) + "\n")
+
 def scrape_website():
     try:
+        clear_file_if_new_day()  # Verificar si se necesita reiniciar el archivo
+
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
             context = browser.new_context(
@@ -31,22 +66,20 @@ def scrape_website():
             print(f'💸 Valor de venta: {venta}')
 
             # Capturar la hora actual en UTC-3
-            utc_now = datetime.utcnow()
-            utc_minus_3 = utc_now - timedelta(hours=3)
-            fecha_hora_utc3 = utc_minus_3.strftime('%Y-%m-%d %H:%M:%S')
+            fecha_hora_utc3 = datetime.utcnow() - timedelta(hours=3)
+            fecha_hora_utc3_str = fecha_hora_utc3.strftime('%Y-%m-%d %H:%M:%S')
 
-            # Estructura del archivo JSON
+            # Estructura del archivo
             data = {
-                'fecha_hora_utc3': fecha_hora_utc3,
+                'fecha_hora_utc3': fecha_hora_utc3_str,
                 'compra': compra,
                 'venta': venta
             }
 
-            # Exportar a JSON
-            with open('dolar_data.json', mode='w', encoding='utf-8') as file:
-                file.write(json.dumps(data, ensure_ascii=False, indent=4))  # Agrega la entrada con saltos de línea
+            # Agregar al archivo de texto
+            append_data_to_file(data)
 
-            print(f"✅ Datos exportados correctamente a 'dolar_data.json' con la fecha/hora {fecha_hora_utc3}")
+            print(f"✅ Datos guardados en '{FILE_PATH}' con la fecha/hora {fecha_hora_utc3_str}")
 
     except Exception as e:
         print(f"❌ Ocurrió un error: {e}")
