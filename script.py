@@ -45,11 +45,6 @@ def scrape_website():
                 # Leer el archivo JSON existente
                 with open('dolar_data.json', "r") as archivo:
                     datos = json.load(archivo)
-                
-                # Asegurarse de que es una lista para poder agregar datos
-                if not isinstance(datos, list):
-                    raise ValueError("El archivo JSON no contiene una lista.")
-
             except (FileNotFoundError, json.JSONDecodeError):
                 # Si el archivo no existe o está vacío, creamos una lista nueva
                 datos = []
@@ -57,10 +52,8 @@ def scrape_website():
             # Añadir el nuevo dato a la lista
             datos.append(nuevo_dato)
 
-
-            # Exportar a JSON
-            with open('dolar_data.json', mode='w', encoding='utf-8') as file:
-                file.write(json.dumps(datos, ensure_ascii=False, indent=4))  # Agrega la entrada con saltos de línea
+            with open('dolar_data.json', "w", encoding="utf-8") as archivo:
+                json.dump(datos, archivo, ensure_ascii=False, indent=4)  # Guarda el archivo JSON actualizado en formato legible
 
             print(f"✅ Datos exportados correctamente a 'dolar_data.json' con la fecha/hora {fecha_hora_utc3}")
 
