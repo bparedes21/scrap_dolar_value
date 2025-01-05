@@ -5,7 +5,7 @@ on:
     branches:
       - main  # Se ejecuta cuando hay un push a la rama 'main'
   schedule:
-    - cron: '* /15 * * *' #'0 12-22 * * *'  # Se ejecuta todos los días de 09:00 a 19:00 UTC-3 (equivalente a 12:00-22:00 UTC)
+    - cron: '*/15 12-22 * * *' #'0 12-22 * * *'  # Se ejecuta todos los días de 09:00 a 19:00 UTC-3 (equivalente a 12:00-22:00 UTC)
 
 jobs:
   scraping_job:
