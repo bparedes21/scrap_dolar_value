@@ -49,7 +49,10 @@ def scrape_website():
                 # Si el archivo no existe o está vacío, creamos una lista nueva
                 datos = []
 
-            # Añadir el nuevo dato a la lista
+            # Verificar el número de elementos en la lista
+            if len(datos) >= 10:
+                datos = []  # Vaciar la lista si ya tiene 10 elementos
+                        # Añadir el nuevo dato a la lista
             datos.append(nuevo_dato)
 
             with open('dolar_data.json', "w", encoding="utf-8") as archivo:
