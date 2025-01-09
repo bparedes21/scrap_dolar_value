@@ -1,9 +1,6 @@
 name: Web Scraping Automation
 
 on:
-  push:
-    branches:
-      - main  # Se ejecuta cuando hay un push a la rama 'main'
     schedule:
       - cron: '0 12 * * *'  # Se ejecuta a las 12:00 UTC
       - cron: '0 13 * * *'  # Se ejecuta a las 13:00 UTC
