@@ -4,9 +4,17 @@ on:
   push:
     branches:
       - main  # Se ejecuta cuando hay un push a la rama 'main'
-  schedule:
-    - cron: '0 12-22 * * *'  # Se ejecuta todos los días de 09:00 a 19:00 UTC-3 (equivalente a 12:00-22:00 UTC)
-
+    schedule:
+      - cron: '0 12 * * *'  # Se ejecuta a las 12:00 UTC
+      - cron: '0 13 * * *'  # Se ejecuta a las 13:00 UTC
+      - cron: '0 14 * * *'  # Se ejecuta a las 14:00 UTC
+      - cron: '0 15 * * *'  # Se ejecuta a las 15:00 UTC
+      - cron: '0 16 * * *'  # Se ejecuta a las 16:00 UTC
+      - cron: '0 17 * * *'  # Se ejecuta a las 17:00 UTC
+      - cron: '0 18 * * *'  # Se ejecuta a las 18:00 UTC
+      - cron: '0 19 * * *'  # Se ejecuta a las 19:00 UTC
+      - cron: '0 20 * * *'  # Se ejecuta a las 20:00 UTC
+      - cron: '0 21 * * *'  # Se ejecuta a las 21:00 UTC
 jobs:
   scraping_job:
     runs-on: ubuntu-latest
