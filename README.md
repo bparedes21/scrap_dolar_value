@@ -8,8 +8,7 @@ Este proyecto automatiza la extracción de datos del dólar blue de **AmbitoFina
 - 🤖 **Automatización de ejecución** mediante **GitHub Actions**.
 
 ## 🌟 Proyecto Complementario
-
-Este proyecto de web scraping está complementado por una **aplicación web en Flask** que permite consultar el valor actual del dólar blue, visualizar su histórico y explorar gráficos interactivos. 
+Este proyecto de web scraping está complementado por una 👉 [****aplicación web en Flask****](https://github.com/bparedes21/flask-ambito-usd-venta) que permite consultar el valor actual del dólar blue, visualizar su histórico y explorar gráficos interactivos. 
 
 Puedes acceder a la aplicación web en vivo aquí:  
 👉 [**App Web en Flask**](https://flask-ambito-usd-venta.vercel.app/)
