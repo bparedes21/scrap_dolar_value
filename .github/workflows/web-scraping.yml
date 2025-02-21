@@ -36,7 +36,7 @@ jobs:
         python script.py
 
     - name: 📁 Subir archivo JSON como artefacto
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: dolar_data
         path: dolar_data.json 
